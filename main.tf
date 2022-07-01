@@ -1,9 +1,15 @@
+#terraform code for database (Rds-mysql) creation and snapshot of that database.
+
+# provider declartion 
+
 provider "aws" {
   region = var.region
   profile = "default"
 }
+# using existing avilability zones
 
 data "aws_availability_zones" "available" {}
+#creation of vpc using modules
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
@@ -17,6 +23,8 @@ module "vpc" {
   enable_dns_support   = true
 }
 
+#create of subnet group for database
+  
 resource "aws_db_subnet_group" "sql_sub" {
   name       = "mydatabase"
   subnet_ids = module.vpc.public_subnets
@@ -26,6 +34,8 @@ resource "aws_db_subnet_group" "sql_sub" {
   }
 }
 
+#creation of security group
+  
 resource "aws_security_group" "rds" {
   name   = "education_rds"
   vpc_id = module.vpc.vpc_id
@@ -48,6 +58,9 @@ resource "aws_security_group" "rds" {
     Name = "education_rds"
   }
 }
+  
+#creation of database 
+  
 resource "aws_db_instance" "rds_database" {
   identifier             = "rds-terraform"
   instance_class         = "db.t2.micro"
@@ -63,10 +76,12 @@ resource "aws_db_instance" "rds_database" {
   skip_final_snapshot    = true
 # parameter_group_name    = "default.mysql8.0"
 }
+#creation of kms_key for en
 resource "aws_kms_key" "rds_database" {
   description = "Encryption key for automated backups"
 }
-
+#creation of snapshot
+  
 resource "aws_db_snapshot" "test" {
   db_instance_identifier = aws_db_instance.rds_database.id
   db_snapshot_identifier = "testsnapshot1234"
