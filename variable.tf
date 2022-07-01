@@ -1,3 +1,5 @@
+#variable declartion for region and password
+
 variable "region" {
   default     = "us-west-2"
   description = "AWS region"
