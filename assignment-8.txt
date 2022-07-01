@@ -1,0 +1,26 @@
+Problem Statement:
+--------------------------
+- DB in RDS-MySQL should be encrypted
+- Backup/snapshot for the DB should be enabled with encryption
+- Verification tests and tear down for the above
+
+Note: Please make sure that candidate covers below items as applicable:
+- Inventory
+- Patterns
+- Configuration
+- Playbooks
+- Modules
+- Encrypting Files
+- Vault
+- Debugging
+- Polling & Asynchronous Actions
+- Error Handling
+- Validations
+
+- Write terraform/ansible/python scripts
+
+STEPS TO BE FOLLOWED TO GET ASSIGNMENT REVIEWED
+---------------------------------------------------------------------------
+- Submit the code to GITHUB and share the link for review.
+- Verification tests are mandatory
+- No hard coding access_key, secret_key, region in terraform/ansible code. It should be picked from AWS confuration form environment.
