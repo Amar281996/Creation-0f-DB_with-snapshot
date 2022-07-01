@@ -1,3 +1,5 @@
+# Output.tf for printing the outputs of created resources
+
 output "rds_hostname" {
   description = "RDS instance hostname"
   value       = aws_db_instance.rds_database.address
