@@ -1,3 +1,5 @@
+#version declartion for provider.
+
 terraform {
   required_providers {
     aws = {
